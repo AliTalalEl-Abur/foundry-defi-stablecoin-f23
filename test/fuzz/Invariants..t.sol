@@ -35,7 +35,6 @@ contract InvariantsTest is StdInvariant, Test {
         //targetContract(address(dsce));
         handler = new Handler(dsce, dsc);
         targetContract(address(handler));
-
     }
 
     function invariant_protocolMustHaveMoreValueThanTotalSupply() public view {
@@ -53,11 +52,11 @@ contract InvariantsTest is StdInvariant, Test {
         console.log("totalSupply:", totalSupply);
         console.log("timesMintIsCalled:", handler.timesMintIsCalled());
 
-        function invariant_gettersShouldNotRevert() public {
-            dsce.getLiquidationBonus();
-            dsce.getPrecision();
-        }
-
         assert(wethValue + wbtcValue >= totalSupply);
+    }
+
+    function invariant_gettersShouldNotRevert() public view {
+        dsce.getLiquidationBonus();
+        dsce.getPrecision();
     }
 }
